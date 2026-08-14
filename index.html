@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MOTIF Cafe &amp; Restaurant</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+    :root {
+      --bg: #89977A;
+      --surface: #F4F7F3;
+      --surface-2: #E8EEE4;
+      --line: #D6E2D3;
+      --text: #233229;
+      --muted: #5E6F60;
+      --dark-green: #4E5D46;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: "Vazirmatn", sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+
+      /*
+        فضای کافی برای Bottom Bar
+        تا آخرین آیتم زیر نوار پایین نرود
+      */
+      padding-bottom: 100px;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(255,255,255,.8);
+      outline-offset: 3px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    background: #89977A;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* افکت محو شدن از بالای عکس */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        #89977A 0%,
+        rgba(137,151,122,0.95) 8%,
+        rgba(137,151,122,0.75) 18%,
+        rgba(137,151,122,0.45) 32%,
+        rgba(137,151,122,0.15) 48%,
+        rgba(137,151,122,0) 65%
+    );
+    z-index: 2;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 3;
+}
+
+    .logo {
+    width: 100%;
+    height: 540px;
+    object-fit: cover;
+    }
+
+    h1 {
+      margin: 10px 0 0;
+
+      color: #fff;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 2.8rem;
+      letter-spacing: 6px;
+    }
+
+    .subtitle {
+      color: #fff;
+      opacity: .9;
+
+      font-family: "Playfair Display", serif;
+
+      letter-spacing: 3px;
+      font-size: .9rem;
+
+      margin-top: 6px;
+    }
+
+    /* =========================
+       TOP NAV
+    ========================= */
+
+    .top-nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:16px auto 0;
+    position:static;
+    width:100%;
+    padding:0 12px;
+}
+
+.top-nav button{
+    background: rgba(255,255,255,.18);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.35);
+    padding:9px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    font-family:"Vazirmatn", sans-serif;
+    font-weight:600;
+    min-width:0;
+    white-space:nowrap;
+}
+
+.top-nav button.active{
+    background:#fff;
+    color:#4E5D46;
+}
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 760px;
+
+      margin: 0 auto;
+
+      padding: 20px;
+      width: 100%;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: pageFade .25s ease;
+    }
+
+    @keyframes pageFade {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      color: #fff;
+
+      font-size: 1.2rem;
+
+      margin: 0 0 14px;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card {
+      background: var(--surface);
+
+      border: 1px solid var(--line);
+
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      margin-bottom: 18px;
+
+      box-shadow:
+        0 5px 18px rgba(35,50,41,.06);
+    }
+
+    .card-title {
+      position: relative;
+      padding: 16px 18px;
+
+      margin: 10px;
+      border: 2px solid var(--dark-green);
+      border-radius: 14px;
+      background: var(--surface-2);
+
+      color: var(--text);
+
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      text-align: right;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .card-title::after {
+      content: "⌄";
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .card-title[aria-expanded="false"]::after {
+      content: "›";
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .card-title:hover {
+      background: var(--dark-green);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .card.is-collapsed .card-title {
+      margin-bottom: 10px;
+    }
+
+    .card .item {
+      display: none;
+    }
+
+    .card.is-open .item {
+      display: flex;
+    }
+
+    .card.is-collapsed .item {
+      display: none;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+      text-align: left;
+      align-items: flex-start;
+      flex: 1;
+    }
+
+    .item-name {
+      font-weight: 700;
+    }
+
+    .item-desc {
+      font-size: .82rem;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+    }
+
+
+    .item-image {
+      width: 84px;
+      height: 84px;
+      flex-shrink: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #E8EEE4;
+    }
+
+    .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .price {
+      margin-top: 6px;
+      color: var(--dark-green);
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    /* =====================================================
+       BOTTOM BAR
+    ===================================================== */
+
+    .bottom-bar {
+      position: fixed;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      width: 100%;
+
+      min-height: 72px;
+
+      background: rgba(244,247,243,.98);
+
+      border-top: 1px solid var(--line);
+
+      box-shadow:
+        0 -5px 25px rgba(0,0,0,.10);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding:
+        10px
+        max(16px, env(safe-area-inset-right))
+        calc(10px + env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
+
+      z-index: 99999;
+
+      direction: ltr;
+    }
+
+    /* =====================================================
+       MENU BUTTON - RIGHT
+    ===================================================== */
+
+    .menu-toggle {
+      appearance: none;
+
+      background: var(--bg);
+
+      color: #fff;
+
+      border: none;
+
+      min-height: 38px;
+
+      padding: 8px 17px;
+
+      border-radius: 999px;
+
+      cursor: pointer;
+
+      font-family: "Vazirmatn", sans-serif;
+
+      font-size: .85rem;
+
+      font-weight: 600;
+
+      white-space: nowrap;
+
+      box-shadow:
+        0 4px 12px rgba(0,0,0,.12);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+    }
+
+    .menu-toggle:hover {
+      opacity: .94;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 6px 15px rgba(0,0,0,.16);
+    }
+
+    .menu-toggle:active {
+      transform: translateY(0);
+    }
+
+    /* =====================================================
+       LANGUAGE - LEFT
+    ===================================================== */
+
+    .lang {
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      direction: ltr;
+    }
+
+    .lang button {
+      appearance: none;
+
+      border: 1px solid var(--line);
+
+      background: #fff;
+
+      color: var(--dark-green);
+
+      min-height: 36px;
+
+      padding: 6px 12px;
+
+      border-radius: 999px;
+
+      cursor: pointer;
+
+      font-family: "Vazirmatn", sans-serif;
+
+      font-size: .8rem;
+
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .lang button:hover {
+      transform: translateY(-1px);
+    }
+
+    .lang button.active {
+      background: var(--bg);
+
+      color: #fff;
+
+      border-color: var(--bg);
+    }
+
+    /* =====================================================
+       MENU PANEL
+    ===================================================== */
+
+    .menu-panel {
+      position: fixed;
+
+      left: 50%;
+
+      bottom: 82px;
+
+      width: min(420px, calc(100% - 32px));
+
+      max-height: calc(100vh - 115px);
+
+      overflow-y: auto;
+
+      transform: translateX(-50%) translateY(20px);
+
+      background: rgba(244,247,243,.99);
+
+      border: 1px solid var(--line);
+
+      border-radius: 24px;
+
+      padding: 18px;
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.20);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      z-index: 99998;
+
+      transition:
+        opacity .22s ease,
+        transform .22s ease,
+        visibility .22s ease;
+    }
+
+    .menu-panel.show {
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: auto;
+
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .menu-panel-title {
+      font-weight: 800;
+
+      color: var(--dark-green);
+
+      margin-bottom: 14px;
+
+      text-align: center;
+
+      font-size: 1rem;
+    }
+
+    /*
+      تک ستونه
+      وسط چین
+    */
+
+    .menu-links {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 9px;
+
+      width: 100%;
+    }
+
+    .menu-link {
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      background: #fff;
+
+      color: var(--dark-green);
+
+      padding: 11px 14px;
+
+      border-radius: 14px;
+
+      cursor: pointer;
+
+      font-family: "Vazirmatn", sans-serif;
+
+      font-size: .9rem;
+
+      font-weight: 600;
+
+      text-align: center;
+
+      transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .menu-link:hover {
+      background: var(--surface-2);
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 4px 10px rgba(35,50,41,.07);
+    }
+
+    .menu-link:active {
+      transform: translateY(0);
+    }
+
+    /* =====================================================
+       MENU OVERLAY
+    ===================================================== */
+
+    .menu-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(35,50,41,.20);
+
+      backdrop-filter: blur(2px);
+
+      -webkit-backdrop-filter: blur(2px);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      z-index: 99997;
+
+      transition:
+        opacity .22s ease,
+        visibility .22s ease;
+    }
+
+    .menu-overlay.show {
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: auto;
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 480px) {
+
+      body {
+        padding-bottom: 94px;
+      }
+
+      .hero {
+        height: 150px;
+        padding-top: 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: .72rem;
+        letter-spacing: 1.5px;
+      }
+
+      .container {
+        padding: 12px;
+      }
+
+      .top-nav {
+        gap: 6px;
+        margin-top: 10px;
+        padding: 0 8px;
+      }
+
+      .top-nav button {
+        flex: 1 1 calc(50% - 6px);
+        padding: 8px 8px;
+        font-size: .78rem;
+      }
+
+      .card {
+        border-radius: 16px;
+        margin-bottom: 12px;
+      }
+
+      .card-title {
+        margin: 8px;
+        padding: 13px 14px;
+        padding-left: 42px;
+        font-size: .9rem;
+      }
+
+      .item {
+        gap: 8px;
+        padding: 13px 12px;
+        align-items: flex-start;
+      }
+
+      .item-info {
+        gap: 4px;
+        min-width: 0;
+        text-align: right;
+        align-items: flex-start;
+        overflow-wrap: anywhere;
+      }
+
+      .item-name {
+        font-size: .9rem;
+        line-height: 1.5;
+      }
+
+      .item-desc {
+        font-size: .72rem;
+        line-height: 1.65;
+      }
+
+      .item-image {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+      }
+
+      .price {
+        padding: 0;
+        margin-top: 2px;
+        font-size: .82rem;
+        line-height: 1.5;
+      }
+
+      .menu-panel {
+        bottom: 80px;
+
+        width: calc(100% - 24px);
+
+        border-radius: 20px;
+
+        padding: 15px;
+      }
+
+      .menu-links {
+        gap: 8px;
+      }
+
+      .menu-toggle {
+        padding: 8px 14px;
+
+        font-size: .8rem;
+      }
+
+      .lang button {
+        padding: 6px 10px;
+      }
+
+      .bottom-bar {
+        min-height: 64px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<!-- =====================================================
+       HEADER
+  ====================================================== -->
+<header class="hero">
+<img alt="MOTIF Cafe" src="images/cafe-banner.jpeg"/>
+<div class="hero-overlay">
+<h1>MOTIF</h1>
+<div class="subtitle">CAFÉ &amp; RESTAURANT</div>
+</div>
+</header>
+<div class="top-nav">
+<button class="active" data-en="Cafe" data-fa="کافه" id="cafeBtn" onclick="showPage('cafe')">کافه</button>
+<button data-en="Food" data-fa="غذا" id="foodBtn" onclick="showPage('food')">غذا</button>
+<button data-en="Breakfast" data-fa="صبحانه" id="breakfastBtn" onclick="showPage('breakfast')">صبحانه</button>
+<button data-en="Hookah" data-fa="قلیان" id="hookahBtn" onclick="showPage('hookah')">قلیان</button>
+</div>
+<!-- =====================================================
+       MAIN
+  ====================================================== -->
+<main>
+<div class="container">
+<!-- =================================================
+           CAFE
+      ================================================== -->
+<section class="page active" id="cafe"><h2 class="section-title" data-en="Cafe" data-fa="کافه">کافه</h2><div class="card"><div class="card-title" data-en="اسپرسو بیس" data-fa="اسپرسو بیس">اسپرسو بیس</div><div class="item"><div class="item-info"><div class="item-name" data-en="اسپرسو كامرشيال (٥٠-٥٠)" data-fa="اسپرسو كامرشيال (٥٠-٥٠)">اسپرسو كامرشيال (٥٠-٥٠)</div><div class="item-desc" data-en="قهوه تركيبي پنجاه درصد عربيكا پنجاه درصد ربوستا" data-fa="قهوه تركيبي پنجاه درصد عربيكا پنجاه درصد ربوستا">قهوه تركيبي پنجاه درصد عربيكا پنجاه درصد ربوستا</div></div><div class="price">150,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسپرسو پريميوم (١٠٠ عربيكا)" data-fa="اسپرسو پريميوم (١٠٠ عربيكا)">اسپرسو پريميوم (١٠٠ عربيكا)</div><div class="item-desc" data-en="اسپرسو صد در صد عربيكا" data-fa="اسپرسو صد در صد عربيكا">اسپرسو صد در صد عربيكا</div></div><div class="price">180,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آمریکانو‌ كامرشيال (٥٠-٥٠)" data-fa="آمریکانو‌ كامرشيال (٥٠-٥٠)">آمریکانو‌ كامرشيال (٥٠-٥٠)</div><div class="item-desc" data-en="قهوه عصاره گیری شده ٥٠/٥٠ به همراه آب جوش" data-fa="قهوه عصاره گیری شده ٥٠/٥٠ به همراه آب جوش">قهوه عصاره گیری شده ٥٠/٥٠ به همراه آب جوش</div></div><div class="price">160,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آمریکانو پريميوم (١٠٠ عربيكا)" data-fa="آمریکانو پريميوم (١٠٠ عربيكا)">آمریکانو پريميوم (١٠٠ عربيكا)</div><div class="item-desc" data-en="قهوه عصاره گیری شده صد عربيكا همراه با آب جوش" data-fa="قهوه عصاره گیری شده صد عربيكا همراه با آب جوش">قهوه عصاره گیری شده صد عربيكا همراه با آب جوش</div></div><div class="price">190,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کاپوچینو" data-fa="کاپوچینو">کاپوچینو</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">200,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="لاته" data-fa="لاته">لاته</div><div class="item-desc" data-en="قهوه عصاره گیری شده به همراه شیر بخار داده شده" data-fa="قهوه عصاره گیری شده به همراه شیر بخار داده شده">قهوه عصاره گیری شده به همراه شیر بخار داده شده</div></div><div class="price">220,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کارامل ماکیاتو" data-fa="کارامل ماکیاتو">کارامل ماکیاتو</div><div class="item-desc" data-en="قهوه اسپرسو شیر بخار داده شده و طعم دهنده کارامل" data-fa="قهوه اسپرسو شیر بخار داده شده و طعم دهنده کارامل">قهوه اسپرسو شیر بخار داده شده و طعم دهنده کارامل</div></div><div class="price">260,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="موکادمیا" data-fa="موکادمیا">موکادمیا</div><div class="item-desc" data-en="سس ماکادمیا به همراه اسپرسو و شیر بخار داده شده" data-fa="سس ماکادمیا به همراه اسپرسو و شیر بخار داده شده">سس ماکادمیا به همراه اسپرسو و شیر بخار داده شده</div></div><div class="price">265,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کوکورو لاته" data-fa="کوکورو لاته">کوکورو لاته</div><div class="item-desc" data-en="اسپرسو به همراه شیر بخار داده شده و کره نارگیل" data-fa="اسپرسو به همراه شیر بخار داده شده و کره نارگیل">اسپرسو به همراه شیر بخار داده شده و کره نارگیل</div></div><div class="price">260,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پیستاچیو لاته" data-fa="پیستاچیو لاته">پیستاچیو لاته</div><div class="item-desc" data-en="سس پسته به همراه شیر بخار داده شده و اسپرسو" data-fa="سس پسته به همراه شیر بخار داده شده و اسپرسو">سس پسته به همراه شیر بخار داده شده و اسپرسو</div></div><div class="price">265,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسکاچ لاته" data-fa="اسکاچ لاته">اسکاچ لاته</div><div class="item-desc" data-en="طعم دهنده آیریش و شکلات فندق به همراه شیر بخار داده شده" data-fa="طعم دهنده آیریش و شکلات فندق به همراه شیر بخار داده شده">طعم دهنده آیریش و شکلات فندق به همراه شیر بخار داده شده</div></div><div class="price">260,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پینات باتر اسپرسو" data-fa="پینات باتر اسپرسو">پینات باتر اسپرسو</div><div class="item-desc" data-en="شکلات سفید به همراه اسپرسو و کره بادام زمینی" data-fa="شکلات سفید به همراه اسپرسو و کره بادام زمینی">شکلات سفید به همراه اسپرسو و کره بادام زمینی</div></div><div class="price">275,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="لاته سیروپ" data-fa="لاته سیروپ">لاته سیروپ</div><div class="item-desc" data-en="ترکیب اسپرسو و شیر بخار داده شده و سیروپ انتخابی" data-fa="ترکیب اسپرسو و شیر بخار داده شده و سیروپ انتخابی">ترکیب اسپرسو و شیر بخار داده شده و سیروپ انتخابی</div></div><div class="price">260,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آفوگاتو" data-fa="آفوگاتو">آفوگاتو</div><div class="item-desc" data-en="بستنی وانیل به همراه اسپرسو" data-fa="بستنی وانیل به همراه اسپرسو">بستنی وانیل به همراه اسپرسو</div></div><div class="price">290,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="چاکلت بار" data-fa="چاکلت بار">چاکلت بار</div><div class="item"><div class="item-info"><div class="item-name" data-en="دیپ ماکادمیا" data-fa="دیپ ماکادمیا">دیپ ماکادمیا</div><div class="item-desc" data-en="شکلات ۷۰٪ به همراه کرم ماکادمیا و شیر" data-fa="شکلات ۷۰٪ به همراه کرم ماکادمیا و شیر">شکلات ۷۰٪ به همراه کرم ماکادمیا و شیر</div></div><div class="price">345,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دیپ چاکلت" data-fa="دیپ چاکلت">دیپ چاکلت</div><div class="item-desc" data-en="شکلات ۷۰٪ به همراه شیر و کره نارگیل" data-fa="شکلات ۷۰٪ به همراه شیر و کره نارگیل">شکلات ۷۰٪ به همراه شیر و کره نارگیل</div></div><div class="price">340,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دیپ نات" data-fa="دیپ نات">دیپ نات</div><div class="item-desc" data-en="کره بادام هندی به همراه شکلات سفید و بادام هندی" data-fa="کره بادام هندی به همراه شکلات سفید و بادام هندی">کره بادام هندی به همراه شکلات سفید و بادام هندی</div></div><div class="price">350,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماسالا تی" data-fa="ماسالا تی">ماسالا تی</div><div class="item-desc" data-en="پودر اسپایسی به همراه شیر بخار داده شده" data-fa="پودر اسپایسی به همراه شیر بخار داده شده">پودر اسپایسی به همراه شیر بخار داده شده</div></div><div class="price">250,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دیپ چاکلت کوتون" data-fa="دیپ چاکلت کوتون">دیپ چاکلت کوتون</div><div class="item-desc" data-en="پوره توت فرنگی به همراه پودر شکلات ۷۰٪" data-fa="پوره توت فرنگی به همراه پودر شکلات ۷۰٪">پوره توت فرنگی به همراه پودر شکلات ۷۰٪</div></div><div class="price">335,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دیپ سفرون ولوت" data-fa="دیپ سفرون ولوت">دیپ سفرون ولوت</div><div class="item-desc" data-en="شکلات سفید به همراه زعفران و سس پسته" data-fa="شکلات سفید به همراه زعفران و سس پسته">شکلات سفید به همراه زعفران و سس پسته</div></div><div class="price">365,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دیپ نوتلا" data-fa="دیپ نوتلا">دیپ نوتلا</div><div class="item-desc" data-en="شکلات ۷۰٪ به همراه کرم نوتلا" data-fa="شکلات ۷۰٪ به همراه کرم نوتلا">شکلات ۷۰٪ به همراه کرم نوتلا</div></div><div class="price">335,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="چای و دمنوش" data-fa="چای و دمنوش">چای و دمنوش</div><div class="item"><div class="item-info"><div class="item-name" data-en="چای سیاه ایرانی" data-fa="چای سیاه ایرانی">چای سیاه ایرانی</div><div class="item-desc" data-en="چای دستچین گیلان" data-fa="چای دستچین گیلان">چای دستچین گیلان</div></div><div class="price">110,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="چای سياه طعم دار" data-fa="چای سياه طعم دار">چای سياه طعم دار</div><div class="item-desc" data-en="چای سیاه دمی به همراه کوکی و نبات" data-fa="چای سیاه دمی به همراه کوکی و نبات">چای سیاه دمی به همراه کوکی و نبات</div></div><div class="price">140,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="چاي زعفران" data-fa="چاي زعفران">چاي زعفران</div><div class="item-desc" data-en="چاي سياه ايراني زعفران دم كرده" data-fa="چاي سياه ايراني زعفران دم كرده">چاي سياه ايراني زعفران دم كرده</div></div><div class="price">160,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="چای مراکشی" data-fa="چای مراکشی">چای مراکشی</div><div class="item-desc" data-en="نعنا،عسل،چاي سياه" data-fa="نعنا،عسل،چاي سياه">نعنا،عسل،چاي سياه</div></div><div class="price">240,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="چای کرک" data-fa="چای کرک">چای کرک</div><div class="item-desc" data-en="ترکیبی از اسپایس ها و شیر و عسل و چای مراکشی( چای نعنا فلفلی و شیرینی عسل)" data-fa="ترکیبی از اسپایس ها و شیر و عسل و چای مراکشی( چای نعنا فلفلی و شیرینی عسل)">ترکیبی از اسپایس ها و شیر و عسل و چای مراکشی( چای نعنا فلفلی و شیرینی عسل)</div></div><div class="price">240,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دمنوش استرابری کیس" data-fa="دمنوش استرابری کیس">دمنوش استرابری کیس</div><div class="item-desc" data-en="ترکیبی از میوه های استوایی و شیرینی انبه و تکه های پا‌پایا" data-fa="ترکیبی از میوه های استوایی و شیرینی انبه و تکه های پا‌پایا">ترکیبی از میوه های استوایی و شیرینی انبه و تکه های پا‌پایا</div></div><div class="price">230,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دمنوش اپل امبر" data-fa="دمنوش اپل امبر">دمنوش اپل امبر</div><div class="item-desc" data-en="ترکیبی از شیرینی سیب و به و گرمی دارچین" data-fa="ترکیبی از شیرینی سیب و به و گرمی دارچین">ترکیبی از شیرینی سیب و به و گرمی دارچین</div></div><div class="price">215,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دمنوش لمون جینجر" data-fa="دمنوش لمون جینجر">دمنوش لمون جینجر</div><div class="item-desc" data-en="طبعی خنک از لمون گرس و نعنا و طبع گرم زنجبیل" data-fa="طبعی خنک از لمون گرس و نعنا و طبع گرم زنجبیل">طبعی خنک از لمون گرس و نعنا و طبع گرم زنجبیل</div></div><div class="price">210,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دمنوش رویال جزمین" data-fa="دمنوش رویال جزمین">دمنوش رویال جزمین</div><div class="item-desc" data-en="ترکیبی از چای سبز خالص و گلبرگ یاس" data-fa="ترکیبی از چای سبز خالص و گلبرگ یاس">ترکیبی از چای سبز خالص و گلبرگ یاس</div></div><div class="price">220,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دمنوش رد رز" data-fa="دمنوش رد رز">دمنوش رد رز</div><div class="item-desc" data-en="ترکیبی ترش از چای ترش و عطر گل رز و توت فرنگی" data-fa="ترکیبی ترش از چای ترش و عطر گل رز و توت فرنگی">ترکیبی ترش از چای ترش و عطر گل رز و توت فرنگی</div></div><div class="price">215,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دمنوش ایرانی" data-fa="دمنوش ایرانی">دمنوش ایرانی</div><div class="item-desc" data-en="ترکیبی از گیاهان دارویی ایرانی با شیرینی عسل" data-fa="ترکیبی از گیاهان دارویی ایرانی با شیرینی عسل">ترکیبی از گیاهان دارویی ایرانی با شیرینی عسل</div></div><div class="price">265,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="آیسد کافی" data-fa="آیسد کافی">آیسد کافی</div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد آمریکانو" data-fa="آیسد آمریکانو">آیسد آمریکانو</div><div class="item-desc" data-en="اسپرسو + آب + یخ" data-fa="اسپرسو + آب + یخ">اسپرسو + آب + یخ</div></div><div class="price">170,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد لاته" data-fa="آیسد لاته">آیسد لاته</div><div class="item-desc" data-en="اسپرسو + یخ + شیر" data-fa="اسپرسو + یخ + شیر">اسپرسو + یخ + شیر</div></div><div class="price">230,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد کارامل ماکیاتو" data-fa="آیسد کارامل ماکیاتو">آیسد کارامل ماکیاتو</div><div class="item-desc" data-en="اسپرسو + شیر + یخ + کارامل" data-fa="اسپرسو + شیر + یخ + کارامل">اسپرسو + شیر + یخ + کارامل</div></div><div class="price">270,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد ماكادميا" data-fa="آیسد ماكادميا">آیسد ماكادميا</div><div class="item-desc" data-en="سس ماکادمیا + اسپرسو + شیر + یخ" data-fa="سس ماکادمیا + اسپرسو + شیر + یخ">سس ماکادمیا + اسپرسو + شیر + یخ</div></div><div class="price">275,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="تریپل پومو" data-fa="تریپل پومو">تریپل پومو</div><div class="item-desc" data-en="تریپل سک + آب انار + اسپرسو" data-fa="تریپل سک + آب انار + اسپرسو">تریپل سک + آب انار + اسپرسو</div></div><div class="price">290,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اورنجینا" data-fa="اورنجینا">اورنجینا</div><div class="item-desc" data-en="آب پرتقال + یخ + اسپرسو" data-fa="آب پرتقال + یخ + اسپرسو">آب پرتقال + یخ + اسپرسو</div></div><div class="price">285,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="فیزی آمریکانو" data-fa="فیزی آمریکانو">فیزی آمریکانو</div><div class="item-desc" data-en="اسپرسو + یخ + تونیک واتر" data-fa="اسپرسو + یخ + تونیک واتر">اسپرسو + یخ + تونیک واتر</div></div><div class="price">220,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="بیتر کروت" data-fa="بیتر کروت">بیتر کروت</div><div class="item-desc" data-en="هویج + اسپرسو + هلو" data-fa="هویج + اسپرسو + هلو">هویج + اسپرسو + هلو</div></div><div class="price">310,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد هانی سینامون" data-fa="آیسد هانی سینامون">آیسد هانی سینامون</div><div class="item-desc" data-en="اسپرسو + عسل + دارچین + شیر + یخ" data-fa="اسپرسو + عسل + دارچین + شیر + یخ">اسپرسو + عسل + دارچین + شیر + یخ</div></div><div class="price">285,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="سوپر فود" data-fa="سوپر فود">سوپر فود</div><div class="item"><div class="item-info"><div class="item-name" data-en="بلو لاته" data-fa="بلو لاته">بلو لاته</div><div class="item-desc" data-en="پودر چای آبی به همراه شیر بخار داده شده و شیرینی وانیل" data-fa="پودر چای آبی به همراه شیر بخار داده شده و شیرینی وانیل">پودر چای آبی به همراه شیر بخار داده شده و شیرینی وانیل</div></div><div class="price">300,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد بلو لاته" data-fa="آیسد بلو لاته">آیسد بلو لاته</div><div class="item-desc" data-en="پودر چای آبی به همراه شیر و نارگیل" data-fa="پودر چای آبی به همراه شیر و نارگیل">پودر چای آبی به همراه شیر و نارگیل</div></div><div class="price">310,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد بلو سی" data-fa="آیسد بلو سی">آیسد بلو سی</div><div class="item-desc" data-en="پوره انبه به همراه چای اسپرولینا آبی شیر و یخ" data-fa="پوره انبه به همراه چای اسپرولینا آبی شیر و یخ">پوره انبه به همراه چای اسپرولینا آبی شیر و یخ</div></div><div class="price">320,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد رد روبی" data-fa="آیسد رد روبی">آیسد رد روبی</div><div class="item-desc" data-en="پوره توت فرنگی به همراه شیر و چای اسپرولینا و فوم بری" data-fa="پوره توت فرنگی به همراه شیر و چای اسپرولینا و فوم بری">پوره توت فرنگی به همراه شیر و چای اسپرولینا و فوم بری</div></div><div class="price">315,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماچا پیستاچیو لاته" data-fa="ماچا پیستاچیو لاته">ماچا پیستاچیو لاته</div><div class="item-desc" data-en="کرم پسته به همراه شیر بخار داده شده و شیرینی وانیل" data-fa="کرم پسته به همراه شیر بخار داده شده و شیرینی وانیل">کرم پسته به همراه شیر بخار داده شده و شیرینی وانیل</div></div><div class="price">310,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد ماچا پیستاچیو لاته" data-fa="آیسد ماچا پیستاچیو لاته">آیسد ماچا پیستاچیو لاته</div><div class="item-desc" data-en="کرم پسته به همراه شیر و شیرینی وانیل" data-fa="کرم پسته به همراه شیر و شیرینی وانیل">کرم پسته به همراه شیر و شیرینی وانیل</div></div><div class="price">320,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد بری ماچا" data-fa="آیسد بری ماچا">آیسد بری ماچا</div><div class="item-desc" data-en="پوره توت فرنگی به همراه شیر و ماچا و فوم توت فرنگی" data-fa="پوره توت فرنگی به همراه شیر و ماچا و فوم توت فرنگی">پوره توت فرنگی به همراه شیر و ماچا و فوم توت فرنگی</div></div><div class="price">320,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد منگو ماچا" data-fa="آیسد منگو ماچا">آیسد منگو ماچا</div><div class="item-desc" data-en="پوره انبه به همراه شیر و یخ" data-fa="پوره انبه به همراه شیر و یخ">پوره انبه به همراه شیر و یخ</div></div><div class="price">330,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد ماچا اورنج" data-fa="آیسد ماچا اورنج">آیسد ماچا اورنج</div><div class="item-desc" data-en="آب پرتقال به همراه ماچا و یخ" data-fa="آب پرتقال به همراه ماچا و یخ">آب پرتقال به همراه ماچا و یخ</div></div><div class="price">320,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماچا لوندر لاته" data-fa="ماچا لوندر لاته">ماچا لوندر لاته</div><div class="item-desc" data-en="لوندر + شیر بخار داده شده + ماچا" data-fa="لوندر + شیر بخار داده شده + ماچا">لوندر + شیر بخار داده شده + ماچا</div></div><div class="price">340,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آیسد ماچا لوندر لاته" data-fa="آیسد ماچا لوندر لاته">آیسد ماچا لوندر لاته</div><div class="item-desc" data-en="لوندر + شیر + ماچا" data-fa="لوندر + شیر + ماچا">لوندر + شیر + ماچا</div></div><div class="price">350,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="اسموتی" data-fa="اسموتی">اسموتی</div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموتی سور چری" data-fa="اسموتی سور چری">اسموتی سور چری</div><div class="item-desc" data-en="لواشک + آلبالو + توت فرنگی" data-fa="لواشک + آلبالو + توت فرنگی">لواشک + آلبالو + توت فرنگی</div></div><div class="price">360,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموتی سیبرین" data-fa="اسموتی سیبرین">اسموتی سیبرین</div><div class="item-desc" data-en="طالبی + آناناس + ادامس نعنایی + سیب سبز" data-fa="طالبی + آناناس + ادامس نعنایی + سیب سبز">طالبی + آناناس + ادامس نعنایی + سیب سبز</div></div><div class="price">335,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموتی آماریلو" data-fa="اسموتی آماریلو">اسموتی آماریلو</div><div class="item-desc" data-en="انبه + وانیل + دارچین" data-fa="انبه + وانیل + دارچین">انبه + وانیل + دارچین</div></div><div class="price">350,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموتی بری رنج" data-fa="اسموتی بری رنج">اسموتی بری رنج</div><div class="item-desc" data-en="تون فرنگی + آناناس+ موز + پشن فروت" data-fa="تون فرنگی + آناناس+ موز + پشن فروت">تون فرنگی + آناناس+ موز + پشن فروت</div></div><div class="price">345,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموتی اوت پیچ" data-fa="اسموتی اوت پیچ">اسموتی اوت پیچ</div><div class="item-desc" data-en="ماست میوه ای +  هلو  + جو دوسر" data-fa="ماست میوه ای +  هلو  + جو دوسر">ماست میوه ای +  هلو  + جو دوسر</div></div><div class="price">355,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموتی فراستی لیمو و نعنا" data-fa="اسموتی فراستی لیمو و نعنا">اسموتی فراستی لیمو و نعنا</div><div class="item-desc" data-en="لیمو + یخ + نعنا" data-fa="لیمو + یخ + نعنا">لیمو + یخ + نعنا</div></div><div class="price">330,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموتی پیچ لیموناد" data-fa="اسموتی پیچ لیموناد">اسموتی پیچ لیموناد</div><div class="item-desc" data-en="لیمو + عسل + سودا" data-fa="لیمو + عسل + سودا">لیمو + عسل + سودا</div></div><div class="price">350,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="ماکتیل" data-fa="ماکتیل">ماکتیل</div><div class="item"><div class="item-info"><div class="item-name" data-en="ماکتیل سان رایز" data-fa="ماکتیل سان رایز">ماکتیل سان رایز</div><div class="item-desc" data-en="پرتقال + گراناداین" data-fa="پرتقال + گراناداین">پرتقال + گراناداین</div></div><div class="price">370,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماکتیل گرین اپل" data-fa="ماکتیل گرین اپل">ماکتیل گرین اپل</div><div class="item-desc" data-en="آب آناناس + سیب سبز + آگاوه" data-fa="آب آناناس + سیب سبز + آگاوه">آب آناناس + سیب سبز + آگاوه</div></div><div class="price">420,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماکتیل بابل گام" data-fa="ماکتیل بابل گام">ماکتیل بابل گام</div><div class="item-desc" data-en="آب پرتقال + رزبری + لیمو" data-fa="آب پرتقال + رزبری + لیمو">آب پرتقال + رزبری + لیمو</div></div><div class="price">380,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماکتیل پینکی" data-fa="ماکتیل پینکی">ماکتیل پینکی</div><div class="item-desc" data-en="آب آلوورا + سیروپ آدامس + لیمو + اکالیپتوس" data-fa="آب آلوورا + سیروپ آدامس + لیمو + اکالیپتوس">آب آلوورا + سیروپ آدامس + لیمو + اکالیپتوس</div></div><div class="price">370,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماکتیل بالریون" data-fa="ماکتیل بالریون">ماکتیل بالریون</div><div class="item-desc" data-en="آب هندوانه + آدامس + آب میوه های استوایی" data-fa="آب هندوانه + آدامس + آب میوه های استوایی">آب هندوانه + آدامس + آب میوه های استوایی</div></div><div class="price">370,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماکتیل پشن اسپارک" data-fa="ماکتیل پشن اسپارک">ماکتیل پشن اسپارک</div><div class="item-desc" data-en="پشن فروت + چای سیاه + سودا" data-fa="پشن فروت + چای سیاه + سودا">پشن فروت + چای سیاه + سودا</div></div><div class="price">320,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ماکتیل تیکی پین هد" data-fa="ماکتیل تیکی پین هد">ماکتیل تیکی پین هد</div><div class="item-desc" data-en="پرتقال + پشن فروت + لوندر" data-fa="پرتقال + پشن فروت + لوندر">پرتقال + پشن فروت + لوندر</div></div><div class="price">410,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="بستني و شيك ها" data-fa="بستني و شيك ها">بستني و شيك ها</div><div class="item"><div class="item-info"><div class="item-name" data-en="بستني و ميوه" data-fa="بستني و ميوه">بستني و ميوه</div><div class="item-desc" data-en="٢ اسكوپ بستني همراه با ميوه و سس شكلات" data-fa="٢ اسكوپ بستني همراه با ميوه و سس شكلات">٢ اسكوپ بستني همراه با ميوه و سس شكلات</div></div><div class="price">350,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="بستني اسپشيال" data-fa="بستني اسپشيال">بستني اسپشيال</div><div class="item-desc" data-en="٣ اسكوپ بستني انتخابي همراه با گارنيش ميوه" data-fa="٣ اسكوپ بستني انتخابي همراه با گارنيش ميوه">٣ اسكوپ بستني انتخابي همراه با گارنيش ميوه</div></div><div class="price">490,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شیک ماکادمیا" data-fa="شیک ماکادمیا">شیک ماکادمیا</div><div class="item-desc" data-en="وانیل + سس ماکادمیا" data-fa="وانیل + سس ماکادمیا">وانیل + سس ماکادمیا</div></div><div class="price">380,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شیک منگو لوتوس" data-fa="شیک منگو لوتوس">شیک منگو لوتوس</div><div class="item-desc" data-en="انبه + لوتوس + دارچین" data-fa="انبه + لوتوس + دارچین">انبه + لوتوس + دارچین</div></div><div class="price">400,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شیک دیپ سی" data-fa="شیک دیپ سی">شیک دیپ سی</div><div class="item-desc" data-en="وانیل + موز + اسپرولینا + کره بادام زمینی" data-fa="وانیل + موز + اسپرولینا + کره بادام زمینی">وانیل + موز + اسپرولینا + کره بادام زمینی</div></div><div class="price">415,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شیک گرین کلود" data-fa="شیک گرین کلود">شیک گرین کلود</div><div class="item-desc" data-en="بستنی وانیل + کارامل + پسته" data-fa="بستنی وانیل + کارامل + پسته">بستنی وانیل + کارامل + پسته</div></div><div class="price">415,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شیک اسنیکرز" data-fa="شیک اسنیکرز">شیک اسنیکرز</div><div class="item-desc" data-en="بستنی اسنیکرز" data-fa="بستنی اسنیکرز">بستنی اسنیکرز</div></div><div class="price">380,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شیک وایت لوتوس" data-fa="شیک وایت لوتوس">شیک وایت لوتوس</div><div class="item-desc" data-en="بستنی وانیل + لوتوس" data-fa="بستنی وانیل + لوتوس">بستنی وانیل + لوتوس</div></div><div class="price">380,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شیک پاپ ماچا" data-fa="شیک پاپ ماچا">شیک پاپ ماچا</div><div class="item-desc" data-en="بستني وانيل،انبه،ماچا" data-fa="بستني وانيل،انبه،ماچا">بستني وانيل،انبه،ماچا</div></div><div class="price">440,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="رفرشر" data-fa="رفرشر">رفرشر</div><div class="item"><div class="item-info"><div class="item-name" data-en="بري رفرشر" data-fa="بري رفرشر">بري رفرشر</div><div class="item-desc" data-en="پوره توت فرنگي، ليمو، سودا" data-fa="پوره توت فرنگي، ليمو، سودا">پوره توت فرنگي، ليمو، سودا</div></div><div class="price">270,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کاکتوس لایم رفرشر" data-fa="کاکتوس لایم رفرشر">کاکتوس لایم رفرشر</div><div class="item-desc" data-en="ليمو،ماكنوش،سودا" data-fa="ليمو،ماكنوش،سودا">ليمو،ماكنوش،سودا</div></div><div class="price">265,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سیتروس رفرشر" data-fa="سیتروس رفرشر">سیتروس رفرشر</div><div class="item-desc" data-en="پرتقال،ليمو،سودا،" data-fa="پرتقال،ليمو،سودا،">پرتقال،ليمو،سودا،</div></div><div class="price">265,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="قهوه دمی" data-fa="قهوه دمی">قهوه دمی</div><div class="item"><div class="item-info"><div class="item-name" data-en="ترک" data-fa="ترک">ترک</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">150,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="فرنچ پرس" data-fa="فرنچ پرس">فرنچ پرس</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">295,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="V60" data-fa="V60">V60</div><div class="item-desc" data-en="قهوه سينگل اورجين دم آوري شده با گجتv60" data-fa="قهوه سينگل اورجين دم آوري شده با گجتv60">قهوه سينگل اورجين دم آوري شده با گجتv60</div></div><div class="price">295,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="جینا" data-fa="جینا">جینا</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">295,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کمکس" data-fa="کمکس">کمکس</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">295,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="نوشيدني" data-fa="نوشيدني">نوشيدني</div><div class="item"><div class="item-info"><div class="item-name" data-en="آب پرتقال طبيعي" data-fa="آب پرتقال طبيعي">آب پرتقال طبيعي</div><div class="item-desc" data-en="پرتقال آب گيري شده" data-fa="پرتقال آب گيري شده">پرتقال آب گيري شده</div></div><div class="price">220,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ليموناد كلاسيك" data-fa="ليموناد كلاسيك">ليموناد كلاسيك</div><div class="item-desc" data-en="ليمو تازه، آب عسل، سودا" data-fa="ليمو تازه، آب عسل، سودا">ليمو تازه، آب عسل، سودا</div></div><div class="price">230,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="موهيتو كلاسيك" data-fa="موهيتو كلاسيك">موهيتو كلاسيك</div><div class="item-desc" data-en="آب ليمو طبيعي و نعناع همراه با آب عسل" data-fa="آب ليمو طبيعي و نعناع همراه با آب عسل">آب ليمو طبيعي و نعناع همراه با آب عسل</div></div><div class="price">240,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پبسي" data-fa="پبسي">پبسي</div><div class="item-desc" data-en="شيشه مشكي" data-fa="شيشه مشكي">شيشه مشكي</div></div><div class="price">51,500 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ميراندا" data-fa="ميراندا">ميراندا</div><div class="item-desc" data-en="شيشه پرتقالي" data-fa="شيشه پرتقالي">شيشه پرتقالي</div></div><div class="price">51,500 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سون آپ" data-fa="سون آپ">سون آپ</div><div class="item-desc" data-en="شيشه" data-fa="شيشه">شيشه</div></div><div class="price">44,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آب معدنی" data-fa="آب معدنی">آب معدنی</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">35,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="نوشابه" data-fa="نوشابه">نوشابه</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">64,500 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آب جو بدون الکل" data-fa="آب جو بدون الکل">آب جو بدون الکل</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">65,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="كيك" data-fa="كيك">كيك</div><div class="item"><div class="item-info"><div class="item-name" data-en="هويج" data-fa="هويج">هويج</div><div class="item-desc" data-en="إسفنجي همراه با خامه" data-fa="إسفنجي همراه با خامه">إسفنجي همراه با خامه</div></div><div class="price">270,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="بلك فارست" data-fa="بلك فارست">بلك فارست</div><div class="item-desc" data-en="شكلات و رزبري" data-fa="شكلات و رزبري">شكلات و رزبري</div></div><div class="price">290,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="موكا" data-fa="موكا">موكا</div><div class="item-desc" data-en="نسكافه اي" data-fa="نسكافه اي">نسكافه اي</div></div><div class="price">290,000 تومان</div></div></div></section>
+<!-- =================================================
+           FOOD
+      ================================================== -->
+<section class="page" id="food"><h2 class="section-title" data-en="Food" data-fa="غذا">غذا</h2><div class="card"><div class="card-title" data-en="سالاد و استارتر" data-fa="سالاد و استارتر">سالاد و استارتر</div><div class="item"><div class="item-info"><div class="item-name" data-en="سالاد سزار گریل تک نفره" data-fa="سالاد سزار گریل تک نفره">سالاد سزار گریل تک نفره</div><div class="item-desc" data-en="كاهو ،مرغ گريل،كروتان،سس سزار،پنير پارمسان" data-fa="كاهو ،مرغ گريل،كروتان،سس سزار،پنير پارمسان">كاهو ،مرغ گريل،كروتان،سس سزار،پنير پارمسان</div></div><div class="price">430,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سالاد سزار گریل دو نفره" data-fa="سالاد سزار گریل دو نفره">سالاد سزار گریل دو نفره</div><div class="item-desc" data-en="كاهو،مرغ گريل،كروتان،پنير پارمسان" data-fa="كاهو،مرغ گريل،كروتان،پنير پارمسان">كاهو،مرغ گريل،كروتان،پنير پارمسان</div></div><div class="price">720,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سالاد سزار سوخاری تک نفره" data-fa="سالاد سزار سوخاری تک نفره">سالاد سزار سوخاری تک نفره</div><div class="item-desc" data-en="كاهو،مرغ سوخاري،كروتان،پنير پارمسان" data-fa="كاهو،مرغ سوخاري،كروتان،پنير پارمسان">كاهو،مرغ سوخاري،كروتان،پنير پارمسان</div></div><div class="price">490,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سالاد سزار سوخاری دو‌ نفره" data-fa="سالاد سزار سوخاری دو‌ نفره">سالاد سزار سوخاری دو‌ نفره</div><div class="item-desc" data-en="كاهو،مرغ سوخاري،كروتان،پنير پارمسان" data-fa="كاهو،مرغ سوخاري،كروتان،پنير پارمسان">كاهو،مرغ سوخاري،كروتان،پنير پارمسان</div></div><div class="price">800,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سالاد اپل گرین" data-fa="سالاد اپل گرین">سالاد اپل گرین</div><div class="item-desc" data-en="میکس سبزیجات به همراه سس سیب ترش ، مرغ گریل ، پنیر پارمسان و پرک بادام" data-fa="میکس سبزیجات به همراه سس سیب ترش ، مرغ گریل ، پنیر پارمسان و پرک بادام">میکس سبزیجات به همراه سس سیب ترش ، مرغ گریل ، پنیر پارمسان و پرک بادام</div></div><div class="price">720,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سوپ" data-fa="سوپ">سوپ</div><div class="item-desc" data-en="سوپ جو به همراه شير و خامه" data-fa="سوپ جو به همراه شير و خامه">سوپ جو به همراه شير و خامه</div></div><div class="price">190,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="سالاد فتوش" data-fa="سالاد فتوش">سالاد فتوش</div><div class="item-desc" data-en="سبزیجات به همراه سس فتوش ، پنیر سنتی ، نان سرخ شده" data-fa="سبزیجات به همراه سس فتوش ، پنیر سنتی ، نان سرخ شده">سبزیجات به همراه سس فتوش ، پنیر سنتی ، نان سرخ شده</div></div><div class="price">540,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="فرنچ فرایز" data-fa="فرنچ فرایز">فرنچ فرایز</div><div class="item-desc" data-en="سیب زمینی سرخ شده به همراه ادویه" data-fa="سیب زمینی سرخ شده به همراه ادویه">سیب زمینی سرخ شده به همراه ادویه</div></div><div class="price">300,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ایندین فرایز" data-fa="ایندین فرایز">ایندین فرایز</div><div class="item-desc" data-en="سیب زمینی به همراه قارچ و بیکن ، دیپ آلفردو" data-fa="سیب زمینی به همراه قارچ و بیکن ، دیپ آلفردو">سیب زمینی به همراه قارچ و بیکن ، دیپ آلفردو</div></div><div class="price">440,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="برگر و پنینی" data-fa="برگر و پنینی">برگر و پنینی</div><div class="item"><div class="item-info"><div class="item-name" data-en="ميني برگر" data-fa="ميني برگر">ميني برگر</div><div class="item-desc" data-en="برگر ٩٥ گرمي و نان ٥٠ گرمي" data-fa="برگر ٩٥ گرمي و نان ٥٠ گرمي">برگر ٩٥ گرمي و نان ٥٠ گرمي</div></div><div class="price">380,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="فوكا چيكن" data-fa="فوكا چيكن">فوكا چيكن</div><div class="item-desc" data-en="نان فوكاچيا كوچك،سينه مرغ،پنير لبنه همراه با سبزيجات" data-fa="نان فوكاچيا كوچك،سينه مرغ،پنير لبنه همراه با سبزيجات">نان فوكاچيا كوچك،سينه مرغ،پنير لبنه همراه با سبزيجات</div></div><div class="price">420,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پنيني باربيكيو نيم پرس" data-fa="پنيني باربيكيو نيم پرس">پنيني باربيكيو نيم پرس</div><div class="item-desc" data-en="نان فوكاچيا كوچك ،سوسيس،كالباس، همراه با سالاد" data-fa="نان فوكاچيا كوچك ،سوسيس،كالباس، همراه با سالاد">نان فوكاچيا كوچك ،سوسيس،كالباس، همراه با سالاد</div></div><div class="price">380,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کلاسیک برگر" data-fa="کلاسیک برگر">کلاسیک برگر</div><div class="item-desc" data-en="بیف١٧٠ گرم  به همراه نان و سبزیجات" data-fa="بیف١٧٠ گرم  به همراه نان و سبزیجات">بیف١٧٠ گرم  به همراه نان و سبزیجات</div></div><div class="price">730,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="چيز برگر" data-fa="چيز برگر">چيز برگر</div><div class="item-desc" data-en="بیف ١٧٠گرم  به همراه نان و پنیر گودا" data-fa="بیف ١٧٠گرم  به همراه نان و پنیر گودا">بیف ١٧٠گرم  به همراه نان و پنیر گودا</div></div><div class="price">780,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کورتینیا برگر" data-fa="کورتینیا برگر">کورتینیا برگر</div><div class="item-desc" data-en="بیف ١٧٠ گرم به همراه نان و سس قارچ و پیازچه" data-fa="بیف ١٧٠ گرم به همراه نان و سس قارچ و پیازچه">بیف ١٧٠ گرم به همراه نان و سس قارچ و پیازچه</div></div><div class="price">820,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="اسموک برگر" data-fa="اسموک برگر">اسموک برگر</div><div class="item-desc" data-en="بیف ١٧٠ گرم به همراه نان و بیکن" data-fa="بیف ١٧٠ گرم به همراه نان و بیکن">بیف ١٧٠ گرم به همراه نان و بیکن</div></div><div class="price">840,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پنینی پستو" data-fa="پنینی پستو">پنینی پستو</div><div class="item-desc" data-en="مرغ مزه دار شده به همراه پستو ریحون ، بادمجان ، ساید سبزیجات" data-fa="مرغ مزه دار شده به همراه پستو ریحون ، بادمجان ، ساید سبزیجات">مرغ مزه دار شده به همراه پستو ریحون ، بادمجان ، ساید سبزیجات</div></div><div class="price">650,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پنینی باربیکیو" data-fa="پنینی باربیکیو">پنینی باربیکیو</div><div class="item-desc" data-en="بیکن ، سوسیس تفت داده شده ، ساید سبزیجات" data-fa="بیکن ، سوسیس تفت داده شده ، ساید سبزیجات">بیکن ، سوسیس تفت داده شده ، ساید سبزیجات</div></div><div class="price">600,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پنینی پولد بیف" data-fa="پنینی پولد بیف">پنینی پولد بیف</div><div class="item-desc" data-en="گوشت پولد شده ، سس قارچ و پیازچه ، ساید سبزیجات" data-fa="گوشت پولد شده ، سس قارچ و پیازچه ، ساید سبزیجات">گوشت پولد شده ، سس قارچ و پیازچه ، ساید سبزیجات</div></div><div class="price">840,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="پاستا" data-fa="پاستا">پاستا</div><div class="item"><div class="item-info"><div class="item-name" data-en="چیکن پستو" data-fa="چیکن پستو">چیکن پستو</div><div class="item-desc" data-en="پنه به همراه سس پستو ریحان و مرغ گریل" data-fa="پنه به همراه سس پستو ریحان و مرغ گریل">پنه به همراه سس پستو ریحان و مرغ گریل</div></div><div class="price">780,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="چیکن آلفردو" data-fa="چیکن آلفردو">چیکن آلفردو</div><div class="item-desc" data-en="پنه به همراه سس آلفردو ، قارچ و مرغ گریل" data-fa="پنه به همراه سس آلفردو ، قارچ و مرغ گریل">پنه به همراه سس آلفردو ، قارچ و مرغ گریل</div></div><div class="price">720,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="پیتزا" data-fa="پیتزا">پیتزا</div><div class="item"><div class="item-info"><div class="item-name" data-en="پیتزا چیکن اسموکی" data-fa="پیتزا چیکن اسموکی">پیتزا چیکن اسموکی</div><div class="item-desc" data-en="خمیر ترد  بیسکوئیتی ، سس پاپریکا ، پنیر موتزارلا ، مرغ گریل ،بیکن گوشت" data-fa="خمیر ترد  بیسکوئیتی ، سس پاپریکا ، پنیر موتزارلا ، مرغ گریل ،بیکن گوشت">خمیر ترد  بیسکوئیتی ، سس پاپریکا ، پنیر موتزارلا ، مرغ گریل ،بیکن گوشت</div></div><div class="price">820,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پنيني باربيكيو نيم پرس" data-fa="پنيني باربيكيو نيم پرس">پنيني باربيكيو نيم پرس</div><div class="item-desc" data-en="نان فوكاچيا كوچك ،سوسيس،كالباس، همراه با سالاد" data-fa="نان فوكاچيا كوچك ،سوسيس،كالباس، همراه با سالاد">نان فوكاچيا كوچك ،سوسيس،كالباس، همراه با سالاد</div></div><div class="price">380,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پیتزا پستو" data-fa="پیتزا پستو">پیتزا پستو</div><div class="item-desc" data-en="خمیر ترد بیسکوئیتی ، پستو ریحان ، پنیر موتزارلا ، مرغ گریل ، پرک بادام ، گوجه خشک" data-fa="خمیر ترد بیسکوئیتی ، پستو ریحان ، پنیر موتزارلا ، مرغ گریل ، پرک بادام ، گوجه خشک">خمیر ترد بیسکوئیتی ، پستو ریحان ، پنیر موتزارلا ، مرغ گریل ، پرک بادام ، گوجه خشک</div></div><div class="price">870,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پیتزا سزار" data-fa="پیتزا سزار">پیتزا سزار</div><div class="item-desc" data-en="خمیر ترد بیسکوئیتی ، سس سزار ، پنیر موتزارلا ، مرغ گریل ، پنیر پارمسان" data-fa="خمیر ترد بیسکوئیتی ، سس سزار ، پنیر موتزارلا ، مرغ گریل ، پنیر پارمسان">خمیر ترد بیسکوئیتی ، سس سزار ، پنیر موتزارلا ، مرغ گریل ، پنیر پارمسان</div></div><div class="price">840,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پیتزا نوستالژی" data-fa="پیتزا نوستالژی">پیتزا نوستالژی</div><div class="item-desc" data-en="خمیر ترد  بیسکوئیتی ، سس گوجه ، پنیر موتزارلا ، کالباس ، سوسیس" data-fa="خمیر ترد  بیسکوئیتی ، سس گوجه ، پنیر موتزارلا ، کالباس ، سوسیس">خمیر ترد  بیسکوئیتی ، سس گوجه ، پنیر موتزارلا ، کالباس ، سوسیس</div></div><div class="price">790,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پیتزا پپرونی" data-fa="پیتزا پپرونی">پیتزا پپرونی</div><div class="item-desc" data-en="خمیر ترد بیسکوئیتی ، سس پاپریکا ، پنیر موتزارلا ، پپرونی ، پولبیبر" data-fa="خمیر ترد بیسکوئیتی ، سس پاپریکا ، پنیر موتزارلا ، پپرونی ، پولبیبر">خمیر ترد بیسکوئیتی ، سس پاپریکا ، پنیر موتزارلا ، پپرونی ، پولبیبر</div></div><div class="price">720,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پیتزا پولد بیف" data-fa="پیتزا پولد بیف">پیتزا پولد بیف</div><div class="item-desc" data-en="خمیر ترد بیسکوئیتی ، سس آلفردو ، پنیر موتزارلا ، گوشت پولد شده ، پیازچه" data-fa="خمیر ترد بیسکوئیتی ، سس آلفردو ، پنیر موتزارلا ، گوشت پولد شده ، پیازچه">خمیر ترد بیسکوئیتی ، سس آلفردو ، پنیر موتزارلا ، گوشت پولد شده ، پیازچه</div></div><div class="price">1,050,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پیتزا سیر استیک" data-fa="پیتزا سیر استیک">پیتزا سیر استیک</div><div class="item-desc" data-en="خمیر ترد بیسکوئیتی ، سس سیر و‌گوجه ، پنیر موتزارلا ، استیک ورقه ای ، سس برنیز" data-fa="خمیر ترد بیسکوئیتی ، سس سیر و‌گوجه ، پنیر موتزارلا ، استیک ورقه ای ، سس برنیز">خمیر ترد بیسکوئیتی ، سس سیر و‌گوجه ، پنیر موتزارلا ، استیک ورقه ای ، سس برنیز</div></div><div class="price">1,090,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="پيتزا مارگريتا" data-fa="پيتزا مارگريتا">پيتزا مارگريتا</div><div class="item-desc" data-en="خمير ايتاليايي ،سس مارينارا،پنير موتزارلا،ريحون ايتاليايي" data-fa="خمير ايتاليايي ،سس مارينارا،پنير موتزارلا،ريحون ايتاليايي">خمير ايتاليايي ،سس مارينارا،پنير موتزارلا،ريحون ايتاليايي</div></div><div class="price">550,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="نان  سير" data-fa="نان  سير">نان  سير</div><div class="item-desc" data-en="خمير ايتاليايي، سس سير،پنير موتزارلا،جعفري خرد شده" data-fa="خمير ايتاليايي، سس سير،پنير موتزارلا،جعفري خرد شده">خمير ايتاليايي، سس سير،پنير موتزارلا،جعفري خرد شده</div></div><div class="price">440,000 تومان</div></div></div><div class="card"><div class="card-title" data-en="غذای اصلی" data-fa="غذای اصلی">غذای اصلی</div><div class="item"><div class="item-info"><div class="item-name" data-en="فاجيتا مرغ" data-fa="فاجيتا مرغ">فاجيتا مرغ</div><div class="item-desc" data-en="سینه مرغ گریل شده به همراه سبزیجات و نان پيتا" data-fa="سینه مرغ گریل شده به همراه سبزیجات و نان پيتا">سینه مرغ گریل شده به همراه سبزیجات و نان پيتا</div></div><div class="price">1,150,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="استیک مرغ" data-fa="استیک مرغ">استیک مرغ</div><div class="item-desc" data-en="سینه مرغ گریل شده به همراه پوره و سبزیجات" data-fa="سینه مرغ گریل شده به همراه پوره و سبزیجات">سینه مرغ گریل شده به همراه پوره و سبزیجات</div></div><div class="price">1,100,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="فاجيتا گوشت" data-fa="فاجيتا گوشت">فاجيتا گوشت</div><div class="item-desc" data-en="گوشت فيله گوساله به همراه سبزيجات و نان پيتا" data-fa="گوشت فيله گوساله به همراه سبزيجات و نان پيتا">گوشت فيله گوساله به همراه سبزيجات و نان پيتا</div></div><div class="price">1,480,000 تومان</div></div></div></section>
+<!-- =================================================
+           BREAKFAST
+      ================================================== -->
+<section class="page" id="breakfast"><h2 class="section-title" data-en="Breakfast" data-fa="صبحانه">صبحانه</h2><div class="card"><div class="card-title" data-en="صبحانه و ميان وعده" data-fa="صبحانه و ميان وعده">صبحانه و ميان وعده</div><div class="item"><div class="item-info"><div class="item-name" data-en="گرانوسو" data-fa="گرانوسو">گرانوسو</div><div class="item-desc" data-en="ماست طعم دار شده، گرانول، انواع مغزها" data-fa="ماست طعم دار شده، گرانول، انواع مغزها">ماست طعم دار شده، گرانول، انواع مغزها</div></div><div class="price">390,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="گرانادا" data-fa="گرانادا">گرانادا</div><div class="item-desc" data-en="ميان وعده رژيمي
+ماستً بدون چربي، گرانول، اسلايس ميوه" data-fa="ميان وعده رژيمي
+ماستً بدون چربي، گرانول، اسلايس ميوه">ميان وعده رژيمي
+ماستً بدون چربي، گرانول، اسلايس ميوه</div></div><div class="price">330,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کروسان اگ" data-fa="کروسان اگ">کروسان اگ</div><div class="item-desc" data-en="نان کروسان ، نیمرو ، پنیر گودا" data-fa="نان کروسان ، نیمرو ، پنیر گودا">نان کروسان ، نیمرو ، پنیر گودا</div></div><div class="price">360,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="کروسان بیکن" data-fa="کروسان بیکن">کروسان بیکن</div><div class="item-desc" data-en="نان کروسان ، بیکن به همراه تخم مرغ هم زده" data-fa="نان کروسان ، بیکن به همراه تخم مرغ هم زده">نان کروسان ، بیکن به همراه تخم مرغ هم زده</div></div><div class="price">420,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="خاچاپوری" data-fa="خاچاپوری">خاچاپوری</div><div class="item-desc" data-en="خمیر نان به همراه پنیر ، سس گوجه و تخم مرغ" data-fa="خمیر نان به همراه پنیر ، سس گوجه و تخم مرغ">خمیر نان به همراه پنیر ، سس گوجه و تخم مرغ</div></div><div class="price">440,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="برانچ لانژ" data-fa="برانچ لانژ">برانچ لانژ</div><div class="item-desc" data-en="سوسیس ، نیمرو ، قارچ کره ای ، سیب زمینی ، سالاد" data-fa="سوسیس ، نیمرو ، قارچ کره ای ، سیب زمینی ، سالاد">سوسیس ، نیمرو ، قارچ کره ای ، سیب زمینی ، سالاد</div></div><div class="price">560,000 تومان</div></div></div></section>
+<!-- =================================================
+           HOOKAH
+      ================================================== -->
+<section class="page" id="hookah"><h2 class="section-title" data-en="Hookah" data-fa="قلیان">قلیان</h2><div class="card"><div class="card-title" data-en="هوکا" data-fa="هوکا">هوکا</div><div class="item"><div class="item-info"><div class="item-name" data-en="تراپیکال VIP" data-fa="تراپیکال VIP">تراپیکال VIP</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">650,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="كازانوا VIP" data-fa="كازانوا VIP">كازانوا VIP</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">650,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="ردچيل VIP" data-fa="ردچيل VIP">ردچيل VIP</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">650,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="لاو" data-fa="لاو">لاو</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">480,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شب های مسکو" data-fa="شب های مسکو">شب های مسکو</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">480,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="آدامس دارچین" data-fa="آدامس دارچین">آدامس دارچین</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">480,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="دو سیب" data-fa="دو سیب">دو سیب</div><div class="item-desc" data-en=" " data-fa=" "> </div></div><div class="price">480,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="بشقاب ميوه" data-fa="بشقاب ميوه">بشقاب ميوه</div><div class="item-desc" data-en="ميوه هاي فصل" data-fa="ميوه هاي فصل">ميوه هاي فصل</div></div><div class="price">300,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شارژ مجدد هوكا VIP" data-fa="شارژ مجدد هوكا VIP">شارژ مجدد هوكا VIP</div><div class="item-desc" data-en="شارژ هوكا" data-fa="شارژ هوكا">شارژ هوكا</div></div><div class="price">350,000 تومان</div></div><div class="item"><div class="item-info"><div class="item-name" data-en="شارژ مجدد هوكا" data-fa="شارژ مجدد هوكا">شارژ مجدد هوكا</div><div class="item-desc" data-en="شارژ مجدد هوكا VIP" data-fa="شارژ مجدد هوكا VIP">شارژ مجدد هوكا VIP</div></div><div class="price">220,000 تومان</div></div></div></section>
+</div>
+</main>
+<!-- =====================================================
+       OVERLAY
+  ====================================================== -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()">
+</div>
+<!-- =====================================================
+       MENU PANEL
+       تک ستونه + وسط چین
+  ====================================================== -->
+<nav aria-label="منوی کامل" class="menu-panel" id="menuPanel">
+<div class="menu-panel-title" data-en="View Menu" data-fa="مشاهده منو">
+      مشاهده منو
+    </div>
+<div class="menu-links">
+<!-- CAFE -->
+<button class="menu-link" data-en="☕ Cafe" data-fa="☕ کافه" onclick="goToCategory('cafe')" type="button">☕ کافه</button>
+<button class="menu-link" data-en="Espresso Base" data-fa="اسپرسو بیس" onclick="goToCategory('cafe','اسپرسو بیس')" type="button">اسپرسو بیس</button>
+<button class="menu-link" data-en="Chocolate Bar" data-fa="چاکلت بار" onclick="goToCategory('cafe','چاکلت بار')" type="button">چاکلت بار</button>
+<button class="menu-link" data-en="Tea &amp; Herbal Infusions" data-fa="چای و دمنوش" onclick="goToCategory('cafe','چای و دمنوش')" type="button">چای و دمنوش</button>
+<button class="menu-link" data-en="Iced Coffee" data-fa="آیسد کافی" onclick="goToCategory('cafe','آیسد کافی')" type="button">آیسد کافی</button>
+<button class="menu-link" data-en="Super Food" data-fa="سوپر فود" onclick="goToCategory('cafe','سوپر فود')" type="button">سوپر فود</button>
+<button class="menu-link" data-en="Smoothies" data-fa="اسموتی" onclick="goToCategory('cafe','اسموتی')" type="button">اسموتی</button>
+<button class="menu-link" data-en="Mocktails" data-fa="ماکتیل" onclick="goToCategory('cafe','ماکتیل')" type="button">ماکتیل</button>
+<button class="menu-link" data-en="Ice Cream &amp; Shakes" data-fa="بستنی و شیک‌ها" onclick="goToCategory('cafe','بستني و شيك ها')" type="button">بستنی و شیک‌ها</button>
+<button class="menu-link" data-en="Refreshers" data-fa="رفرشر" onclick="goToCategory('cafe','رفرشر')" type="button">رفرشر</button>
+<button class="menu-link" data-en="Drip Coffee" data-fa="قهوه دمی" onclick="goToCategory('cafe','قهوه دمی')" type="button">قهوه دمی</button>
+<button class="menu-link" data-en="Beverages" data-fa="نوشیدنی" onclick="goToCategory('cafe','نوشيدني ')" type="button">نوشیدنی</button>
+<button class="menu-link" data-en="Cakes" data-fa="کیک" onclick="goToCategory('cafe','كيك')" type="button">کیک</button>
+<!-- FOOD -->
+<button class="menu-link" data-en="🍽 Food" data-fa="🍽 غذا" onclick="goToCategory('food')" type="button">🍽 غذا</button>
+<button class="menu-link" data-en="Salads &amp; Starters" data-fa="سالاد و استارتر" onclick="goToCategory('food','سالاد و استارتر')" type="button">سالاد و استارتر</button>
+<button class="menu-link" data-en="Burgers &amp; Panini" data-fa="برگر و پنینی" onclick="goToCategory('food','برگر و پنینی')" type="button">برگر و پنینی</button>
+<button class="menu-link" data-en="Pasta" data-fa="پاستا" onclick="goToCategory('food','پاستا')" type="button">پاستا</button>
+<button class="menu-link" data-en="Pizza" data-fa="پیتزا" onclick="goToCategory('food','پیتزا')" type="button">پیتزا</button>
+<button class="menu-link" data-en="Main Courses" data-fa="غذای اصلی" onclick="goToCategory('food','غذای اصلی')" type="button">غذای اصلی</button>
+<!-- BREAKFAST -->
+<button class="menu-link" data-en="🍳 Breakfast" data-fa="🍳 صبحانه" onclick="goToCategory('breakfast')" type="button">🍳 صبحانه</button>
+<button class="menu-link" data-en="Breakfast &amp; Snacks" data-fa="صبحانه و میان‌وعده" onclick="goToCategory('breakfast','صبحانه و ميان وعده')" type="button">صبحانه و میان‌وعده</button>
+<!-- HOOKAH -->
+<button class="menu-link" data-en="🌿 Hookah" data-fa="🌿 قلیان" onclick="goToCategory('hookah')" type="button">🌿 قلیان</button>
+<button class="menu-link" data-en="Hookah Menu" data-fa="هوکا" onclick="goToCategory('hookah','هوکا')" type="button">هوکا</button>
+</div>
+</nav>
+<!-- =====================================================
+       BOTTOM BAR
+  ====================================================== -->
+<footer class="bottom-bar">
+<!-- LEFT: LANGUAGE -->
+<div class="lang">
+<button class="active" id="faBtn" onclick="setLanguage('fa')" type="button">فارسی</button>
+<button id="enBtn" onclick="setLanguage('en')" type="button">EN</button>
+</div>
+<!-- RIGHT: MENU -->
+<button aria-controls="menuPanel" aria-expanded="false" class="menu-toggle" data-en="View Menu" data-fa="مشاهده منو" id="menuToggle" onclick="toggleMenu()" type="button">
+      مشاهده منو
+    </button>
+</footer>
+<!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+<script>
+
+    /* =====================================================
+       SHOW MAIN CATEGORY
+    ====================================================== */
+
+    function showPage(page) {
+
+      document
+        .querySelectorAll(".page")
+        .forEach(function(p) {
+
+          p.classList.remove("active");
+
+        });
+
+
+      const selectedPage =
+        document.getElementById(page);
+
+
+      if (selectedPage) {
+
+        selectedPage.classList.add("active");
+
+      }
+
+
+      document
+        .querySelectorAll(".top-nav button")
+        .forEach(function(button) {
+
+          button.classList.remove("active");
+
+        });
+
+
+      const selectedButton =
+        document.getElementById(page + "Btn");
+
+
+      if (selectedButton) {
+
+        selectedButton.classList.add("active");
+
+      }
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =====================================================
+       TOGGLE MENU
+    ====================================================== */
+
+    function toggleMenu() {
+
+      const menu =
+        document.getElementById("menuPanel");
+
+      const overlay =
+        document.getElementById("menuOverlay");
+
+      const button =
+        document.getElementById("menuToggle");
+
+
+      const isOpen =
+        menu.classList.contains("show");
+
+
+      if (isOpen) {
+
+        closeMenu();
+
+      } else {
+
+        menu.classList.add("show");
+
+        overlay.classList.add("show");
+
+        button.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       CLOSE MENU
+    ====================================================== */
+
+    function closeMenu() {
+
+      const menu =
+        document.getElementById("menuPanel");
+
+      const overlay =
+        document.getElementById("menuOverlay");
+
+      const button =
+        document.getElementById("menuToggle");
+
+
+      menu.classList.remove("show");
+
+      overlay.classList.remove("show");
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+
+
+    /* =====================================================
+       GO TO CATEGORY / HEADER
+    ====================================================== */
+
+    function goToCategory(page, headerName) {
+
+      closeMenu();
+
+      showPage(page);
+
+      if (!headerName) {
+        return;
+      }
+
+      setTimeout(function() {
+        const pageElement = document.getElementById(page);
+        if (!pageElement) return;
+
+        const wanted = String(headerName).replace(/\s+/g, " ").trim();
+        const card = Array.from(pageElement.querySelectorAll(".card")).find(function(item) {
+          const title = item.querySelector(".card-title");
+          if (!title) return false;
+          return [title.textContent, title.dataset.fa, title.dataset.en]
+            .filter(Boolean)
+            .some(function(value) {
+              return String(value).replace(/\s+/g, " ").trim() === wanted;
+            });
+        });
+
+        if (card) {
+          expandCard(card);
+          card.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 50);
+
+    }
+
+    function expandCard(card) {
+      if (!card) return;
+
+      const page = card.closest(".page");
+      if (page) {
+        page.querySelectorAll(".card.is-open").forEach(function(otherCard) {
+          if (otherCard !== card) {
+            otherCard.classList.remove("is-open");
+            otherCard.classList.add("is-collapsed");
+            const otherTitle = otherCard.querySelector(".card-title");
+            if (otherTitle) {
+              otherTitle.setAttribute("aria-expanded", "false");
+            }
+          }
+        });
+      }
+
+      card.classList.remove("is-collapsed");
+      card.classList.add("is-open");
+      const title = card.querySelector(".card-title");
+      if (title) title.setAttribute("aria-expanded", "true");
+    }
+
+    function toggleCard(card) {
+      if (!card) return;
+      if (card.classList.contains("is-open")) {
+        card.classList.remove("is-open");
+        card.classList.add("is-collapsed");
+        const title = card.querySelector(".card-title");
+        if (title) title.setAttribute("aria-expanded", "false");
+      } else {
+        expandCard(card);
+      }
+    }
+
+
+    /* =====================================================
+       LANGUAGE
+    ====================================================== */
+
+    function setLanguage(language) {
+
+      const faBtn = document.getElementById("faBtn");
+      const enBtn = document.getElementById("enBtn");
+      const isEnglish = language === "en";
+      const categoryEnglish = {
+        "اسپرسو بیس": "Espresso Base",
+        "چاکلت بار": "Chocolate Bar",
+        "چای و دمنوش": "Tea & Herbal Infusions",
+        "آیسد کافی": "Iced Coffee",
+        "سوپر فود": "Super Food",
+        "اسموتی": "Smoothies",
+        "ماکتیل": "Mocktails",
+        "بستني و شيك ها": "Ice Cream & Shakes",
+        "رفرشر": "Refreshers",
+        "قهوه دمی": "Drip Coffee",
+        "نوشيدني": "Beverages",
+        "كيك": "Cakes",
+        "سالاد و استارتر": "Salads & Starters",
+        "برگر و پنینی": "Burgers & Panini",
+        "پاستا": "Pasta",
+        "پیتزا": "Pizza",
+        "غذای اصلی": "Main Courses",
+        "صبحانه و ميان وعده": "Breakfast & Snacks",
+        "هوکا": "Hookah"
+      };
+      const phraseEnglish = [
+        ["اسپرسو", "Espresso"], ["آمریکانو", "Americano"], ["کاپوچینو", "Cappuccino"],
+        ["لاته", "Latte"], ["ماکیاتو", "Macchiato"], ["موکا", "Mocha"], ["آفوگاتو", "Affogato"],
+        ["چای", "Tea"], ["دمنوش", "Herbal Tea"], ["شکلات", "Chocolate"], ["چاکلت", "Chocolate"],
+        ["آیسد", "Iced"], ["آیس", "Iced"], ["اسموتی", "Smoothie"], ["ماکتیل", "Mocktail"],
+        ["رفرشر", "Refresher"], ["شیک", "Shake"], ["بستنی", "Ice Cream"], ["قهوه", "Coffee"],
+        ["سالاد", "Salad"], ["سوپ", "Soup"], ["استارتر", "Starter"], ["برگر", "Burger"],
+        ["پنینی", "Panini"], ["پاستا", "Pasta"], ["پیتزا", "Pizza"], ["مرغ", "Chicken"],
+        ["چیکن", "Chicken"], ["گوشت", "Beef"], ["استیک", "Steak"], ["قارچ", "Mushroom"],
+        ["پنیر", "Cheese"], ["سیب", "Apple"], ["موز", "Banana"], ["انبه", "Mango"],
+        ["توت فرنگی", "Strawberry"], ["لیمو", "Lemon"], ["پرتقال", "Orange"],
+        ["نعنا", "Mint"], ["دارچین", "Cinnamon"], ["وانیل", "Vanilla"], ["نوتلا", "Nutella"],
+        ["پسته", "Pistachio"], ["کارامل", "Caramel"], ["زعفران", "Saffron"],
+        ["صبحانه", "Breakfast"], ["میان وعده", "Snack"], ["کروسان", "Croissant"],
+        ["قلیان", "Hookah"], ["کیک", "Cake"], ["نوشیدنی", "Beverage"], ["آب", "Water"],
+        ["شیر", "Milk"], ["یخ", "Ice"], ["سس", "Sauce"], ["نان", "Bread"],
+        ["سبزیجات", "Vegetables"], ["سیر", "Garlic"], ["تخم مرغ", "Egg"], ["بیکن", "Bacon"],
+        ["کلاسیک", "Classic"], ["مخصوص", "Special"], ["پریمیوم", "Premium"],
+        ["دوسیب", "Double Apple"], ["دو سیب", "Double Apple"], ["میکس", "Mix"],
+        ["طبیعی", "Fresh"], ["فصل", "Seasonal"], ["ترک", "Turkish"], ["ماچا", "Matcha"]
+      ];
+      const transliteration = {
+        "ا":"a","آ":"a","ب":"b","پ":"p","ت":"t","ث":"s","ج":"j","چ":"ch","ح":"h","خ":"kh",
+        "د":"d","ذ":"z","ر":"r","ز":"z","ژ":"zh","س":"s","ش":"sh","ص":"s","ض":"z","ط":"t",
+        "ظ":"z","ع":"a","غ":"gh","ف":"f","ق":"gh","ک":"k","گ":"g","ل":"l","م":"m","ن":"n",
+        "و":"v","ه":"h","ی":"y","ء":"","ئ":"y","ك":"k","ي":"y","ة":"h"
+      };
+      function englishize(value) {
+        let result = (value || "").trim();
+        phraseEnglish.forEach(function(pair) {
+          result = result.split(pair[0]).join(pair[1]);
+        });
+        result = result.replace(/[\u0600-\u06ff]+/g, function(word) {
+          return word.split("").map(function(letter) {
+            return transliteration[letter] || letter;
+          }).join("");
+        });
+        return result || "Details unavailable";
+      }
+
+      document.documentElement.lang = isEnglish ? "en" : "fa";
+      document.documentElement.dir = isEnglish ? "ltr" : "rtl";
+
+      if (faBtn) faBtn.classList.toggle("active", !isEnglish);
+      if (enBtn) enBtn.classList.toggle("active", isEnglish);
+
+      document.querySelectorAll("[data-fa][data-en]").forEach(function(el) {
+        let englishText = el.dataset.en;
+        if (el.classList.contains("card-title")) {
+          englishText = categoryEnglish[el.dataset.fa.trim()] || englishText;
+        } else if (el.classList.contains("item-name") || el.classList.contains("item-desc")) {
+          englishText = englishize(el.dataset.fa);
+        }
+        el.textContent = isEnglish ? englishText : el.dataset.fa;
+      });
+
+      localStorage.setItem("motifLanguage", language);
+    }
+
+    function normalizeDigits(value) {
+      return String(value)
+        .replace(/[۰-۹]/g, function(digit) {
+          return "۰۱۲۳۴۵۶۷۸۹".indexOf(digit);
+        })
+        .replace(/[٠-٩]/g, function(digit) {
+          return "٠١٢٣٤٥٦٧٨٩".indexOf(digit);
+        });
+    }
+
+    function normalizeAllVisibleDigits() {
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: function(node) {
+            return node.parentElement &&
+              node.parentElement.tagName !== "SCRIPT" &&
+              node.parentElement.tagName !== "STYLE"
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_REJECT;
+          }
+        }
+      );
+
+      const textNodes = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        textNodes.push(node);
+      }
+      textNodes.forEach(function(textNode) {
+        textNode.nodeValue = normalizeDigits(textNode.nodeValue);
+      });
+
+      document.querySelectorAll("[data-fa], [data-en], .price").forEach(function(element) {
+        Array.from(element.attributes).forEach(function(attribute) {
+          if (attribute.name === "data-fa" || attribute.name === "data-en") {
+            element.setAttribute(attribute.name, normalizeDigits(attribute.value));
+          }
+        });
+        if (element.classList.contains("price")) {
+          element.textContent = normalizeDigits(element.textContent);
+        }
+      });
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".card").forEach(function(card) {
+        const title = card.querySelector(".card-title");
+        if (!title) return;
+        card.classList.add("is-collapsed");
+        card.classList.remove("is-open");
+        title.setAttribute("role", "button");
+        title.setAttribute("tabindex", "0");
+        title.setAttribute("aria-expanded", "false");
+        title.addEventListener("click", function() {
+          toggleCard(card);
+        });
+        title.addEventListener("keydown", function(event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggleCard(card);
+          }
+        });
+      });
+
+      document.querySelectorAll(".item").forEach(function(item) {
+        const price = item.querySelector(".price");
+        const itemInfo = item.querySelector(".item-info");
+        if (price) {
+          price.textContent = price.textContent.replace(/\s*تومان\s*$/, "").trim();
+          if (itemInfo) {
+            itemInfo.appendChild(price);
+            const description = itemInfo.querySelector(".item-desc");
+            if (description) {
+              itemInfo.insertBefore(price, description);
+            }
+          }
+        }
+
+        if (!item.querySelector(".item-image")) {
+          const imageSlot = document.createElement("div");
+          imageSlot.className = "item-image";
+          imageSlot.setAttribute("data-image-slot", "true");
+          item.appendChild(imageSlot);
+        }
+      });
+
+      normalizeAllVisibleDigits();
+      setLanguage(localStorage.getItem("motifLanguage") || "fa");
+    });
+
+    /* =====================================================
+       ESC KEY
+    ====================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+
+          closeMenu();
+
+        }
+
+      }
+    );
+
+
+  </script>
+</body>
+</html>
