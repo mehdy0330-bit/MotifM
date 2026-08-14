@@ -789,7 +789,55 @@
       }
     }
 
-  </style>
+  
+/* =========================
+   PRIMARY CATEGORY BUTTONS — EMPHASIS
+========================= */
+.top-nav button{
+  padding:12px 22px;
+  min-width:120px;
+  border:1.5px solid rgba(255,255,255,.42);
+  border-radius:14px;
+  font-size:1.05rem;
+  font-weight:800;
+  letter-spacing:0;
+  line-height:1.05;
+  text-shadow:0 1px 0 rgba(0,0,0,.10);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,.14),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+.top-nav button:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.28);
+  border-color:rgba(255,255,255,.56);
+  box-shadow:
+    0 7px 18px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.top-nav button.active{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.82);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.20),
+    0 0 0 2px rgba(255,255,255,.18);
+}
+
+@media (max-width:600px){
+  .top-nav button{
+    min-width:0;
+    padding:10px 10px;
+    font-size:.95rem;
+    border-radius:13px;
+  }
+  .top-nav button.active{
+    transform:translateY(-1px);
+  }
+}
+
+</style>
 </head>
 <body>
 <!-- =====================================================
@@ -853,7 +901,7 @@
 <button class="menu-link" data-en="Espresso Base" data-fa="اسپرسو بیس" onclick="goToCategory('cafe','اسپرسو بیس')" type="button">اسپرسو بیس</button>
 <button class="menu-link" data-en="Chocolate Bar" data-fa="چاکلت بار" onclick="goToCategory('cafe','چاکلت بار')" type="button">چاکلت بار</button>
 <button class="menu-link" data-en="Tea &amp; Herbal Infusions" data-fa="چای و دمنوش" onclick="goToCategory('cafe','چای و دمنوش')" type="button">چای و دمنوش</button>
-<button class="menu-link" data-en="Iced Drinks" data-fa="آیس" onclick="goToCategory('cafe','آیس')" type="button">آیس</button>
+<button class="menu-link" data-en="Ice" data-fa="آیس" onclick="goToCategory('cafe','آیس')" type="button">آیس</button>
 
 <button class="menu-link" data-en="Smoothies" data-fa="اسموتی" onclick="goToCategory('cafe','اسموتی')" type="button">اسموتی</button>
 <button class="menu-link" data-en="Mocktails" data-fa="ماکتیل" onclick="goToCategory('cafe','ماکتیل')" type="button">ماکتیل</button>
@@ -1142,208 +1190,31 @@
         ["دوسیب", "Double Apple"], ["دو سیب", "Double Apple"], ["میکس", "Mix"],
         ["طبیعی", "Fresh"], ["فصل", "Seasonal"], ["ترک", "Turkish"], ["ماچا", "Matcha"]
       ];
-      const exactEnglish = {
-        "اسپرسو بیس": "Espresso Base",
-        "چاکلت بار": "Chocolate Bar",
-        "چای و دمنوش": "Tea & Herbal Infusions",
-        "آیس": "Iced Drinks",
-        "اسموتی": "Smoothies",
-        "ماکتیل": "Mocktails",
-        "بستني و شيك ها": "Ice Cream & Shakes",
-        "بستنی و شیک ها": "Ice Cream & Shakes",
-        "رفرشر": "Refreshers",
-        "قهوه دمی": "Drip Coffee",
-        "نوشيدني": "Beverages",
-        "نوشیدنی": "Beverages",
-        "كيك": "Cakes",
-        "کیک": "Cakes",
-        "سالاد و استارتر": "Salads & Starters",
-        "برگر و پنینی": "Burgers & Paninis",
-        "پاستا": "Pasta",
-        "پیتزا": "Pizza",
-        "غذای اصلی": "Main Courses",
-        "صبحانه و ميان وعده": "Breakfast & Snacks",
-        "صبحانه و میان وعده": "Breakfast & Snacks",
-        "هوکا": "Hookah",
-        "اسپرسو كامرشيال (٥٠-٥٠)": "Commercial Espresso (50/50)",
-        "اسپرسو کامرشیال (۵۰-۵۰)": "Commercial Espresso (50/50)",
-        "قهوه تركيبي پنجاه درصد عربيكا پنجاه درصد ربوستا": "50% Arabica, 50% Robusta blend",
-        "اسپرسو پريميوم (١٠٠ عربيكا)": "Premium Espresso (100% Arabica)",
-        "اسپرسو پریمیوم (۱۰۰ عربیکا)": "Premium Espresso (100% Arabica)",
-        "اسپرسو صد در صد عربيكا": "100% Arabica Espresso",
-        "آمریکانو‌ كامرشيال (٥٠-٥٠)": "Commercial Americano (50/50)",
-        "آمریکانو کامرشیال (۵۰-۵۰)": "Commercial Americano (50/50)",
-        "قهوه عصاره گیری شده ٥٠/٥٠ به همراه آب جوش": "50/50 espresso served with hot water",
-        "آمریکانو پريميوم (١٠٠ عربيكا)": "Premium Americano (100% Arabica)",
-        "آمریکانو پریمیوم (۱۰۰ عربیکا)": "Premium Americano (100% Arabica)",
-        "قهوه عصاره گیری شده صد عربيكا همراه با آب جوش": "100% Arabica espresso served with hot water",
-        "کاپوچینو": "Cappuccino",
-        "لاته": "Latte",
-        "قهوه عصاره گیری شده به همراه شیر بخار داده شده": "Espresso with steamed milk",
-        "کارامل ماکیاتو": "Caramel Macchiato",
-        "قهوه اسپرسو شیر بخار داده شده و طعم دهنده کارامل": "Espresso, steamed milk, and caramel syrup",
-        "موکادمیا": "Macadamia Latte",
-        "کوکورو لاته": "Coconut Latte",
-        "پیستاچیو لاته": "Pistachio Latte",
-        "اسکاچ لاته": "Butterscotch Latte",
-        "پینات باتر اسپرسو": "Peanut Butter Espresso",
-        "لاته سیروپ": "Flavoured Latte",
-        "ترکیب اسپرسو و شیر بخار داده شده و سیروپ انتخابی": "Espresso, steamed milk, and your choice of syrup",
-        "آفوگاتو": "Affogato",
-        "بستنی وانیل به همراه اسپرسو": "Vanilla ice cream with espresso",
-        "دیپ ماکادمیا": "Macadamia Chocolate Dip",
-        "دیپ چاکلت": "Chocolate Dip",
-        "دیپ نات": "Nut Dip",
-        "ماسالا تی": "Masala Tea",
-        "دیپ چاکلت کوتون": "Cotton Chocolate Dip",
-        "دیپ سفرون ولوت": "Saffron Velvet Dip",
-        "دیپ نوتلا": "Nutella Dip",
-        "چای سیاه ایرانی": "Iranian Black Tea",
-        "چای دستچین گیلان": "Handpicked Gilan Tea",
-        "چای سیاه طعم دار": "Flavoured Black Tea",
-        "چای زعفران": "Saffron Tea",
-        "چای مراکشی": "Moroccan Tea",
-        "چای کرک": "Karak Tea",
-        "دمنوش استرابری کیس": "Strawberry Kiss Herbal Tea",
-        "دمنوش اپل امبر": "Apple Amber Herbal Tea",
-        "دمنوش لمون جینجر": "Lemon Ginger Herbal Tea",
-        "دمنوش رویال جزمین": "Royal Jasmine Herbal Tea",
-        "دمنوش رد رز": "Red Rose Herbal Tea",
-        "دمنوش ایرانی": "Iranian Herbal Tea",
-        "آیس آمریکانو": "Iced Americano",
-        "آیس لاته": "Iced Latte",
-        "آیس کارامل ماکیاتو": "Iced Caramel Macchiato",
-        "آیس ماكادميا": "Iced Macadamia Latte",
-        "تریپل پومو": "Triple Pomo",
-        "اورنجینا": "Orangina",
-        "فیزی آمریکانو": "Fizzy Americano",
-        "بیتر کروت": "Bitter Citrus",
-        "آیس هانی سینامون": "Iced Honey Cinnamon",
-        "اسموتی سور چری": "Sour Cherry Smoothie",
-        "اسموتی سیبرین": "Siberian Smoothie",
-        "اسموتی آماریلو": "Amarillo Smoothie",
-        "اسموتی بری رنج": "Berry Range Smoothie",
-        "اسموتی اوت پیچ": "Oat Peach Smoothie",
-        "اسموتی فراستی لیمو و نعنا": "Frosty Lemon & Mint Smoothie",
-        "اسموتی پیچ لیموناد": "Peach Lemonade Smoothie",
-        "ماکتیل سان رایز": "Sunrise Mocktail",
-        "ماکتیل گرین اپل": "Green Apple Mocktail",
-        "ماکتیل بابل گام": "Bubble Gum Mocktail",
-        "ماکتیل پینکی": "Pinky Mocktail",
-        "ماکتیل بالریون": "Ballerion Mocktail",
-        "ماکتیل پشن اسپارک": "Passion Spark Mocktail",
-        "ماکتیل تیکی پین هد": "Tiki Pinhead Mocktail",
-        "بستني و ميوه": "Ice Cream & Fruit",
-        "بستني اسپشيال": "Special Ice Cream",
-        "شیک ماکادمیا": "Macadamia Shake",
-        "شیک منگو لوتوس": "Mango Lotus Shake",
-        "شیک دیپ سی": "Deep Sea Shake",
-        "شیک گرین کلود": "Green Cloud Shake",
-        "شیک اسنیکرز": "Snickers Shake",
-        "شیک وایت لوتوس": "White Lotus Shake",
-        "شیک پاپ ماچا": "Pop Matcha Shake",
-        "بري رفرشر": "Berry Refresher",
-        "کاکتوس لایم رفرشر": "Cactus Lime Refresher",
-        "سیتروس رفرشر": "Citrus Refresher",
-        "ترک": "Turkish Coffee",
-        "فرنچ پرس": "French Press",
-        "جینا": "Gina",
-        "کمکس": "Chemex",
-        "آب پرتقال طبیعی": "Fresh Orange Juice",
-        "لیموناد کلاسیک": "Classic Lemonade",
-        "موهیتو کلاسیک": "Classic Mojito",
-        "پبسی": "Pepsi",
-        "میراندا": "Mirinda",
-        "سون آپ": "7UP",
-        "آب معدنی": "Bottled Water",
-        "نوشابه": "Soft Drink",
-        "آب جو بدون الکل": "Non-Alcoholic Malt Beverage",
-        "هویج": "Carrot Juice",
-        "بلک فارست": "Black Forest",
-        "سالاد سزار گریل تک نفره": "Grilled Chicken Caesar Salad — Single",
-        "سالاد سزار گریل دو نفره": "Grilled Chicken Caesar Salad — Sharing",
-        "سالاد سزار سوخاری تک نفره": "Crispy Chicken Caesar Salad — Single",
-        "سالاد سزار سوخاری دو نفره": "Crispy Chicken Caesar Salad — Sharing",
-        "سالاد اپل گرین": "Green Apple Salad",
-        "سوپ": "Soup",
-        "فرنچ فرایز": "French Fries",
-        "ایندین فرایز": "Indian Fries",
-        "مینی برگر": "Mini Burger",
-        "فوکا چیکن": "Chicken Focaccia",
-        "پنینی باربیکیو نیم پرس": "Half-Portion BBQ Panini",
-        "کلاسیک برگر": "Classic Burger",
-        "چیز برگر": "Cheeseburger",
-        "کورتینیا برگر": "Cortinia Burger",
-        "اسموک برگر": "Smoky Burger",
-        "پنینی پستو": "Pesto Panini",
-        "پنینی باربیکیو": "BBQ Panini",
-        "پنینی پولد بیف": "Pulled Beef Panini",
-        "چیکن پستو": "Chicken Pesto Pasta",
-        "چیکن آلفردو": "Chicken Alfredo Pasta",
-        "پیتزا چیکن اسموکی": "Smoky Chicken Pizza",
-        "پیتزا پستو": "Pesto Pizza",
-        "پیتزا سزار": "Caesar Pizza",
-        "پیتزا نوستالژی": "Nostalgia Pizza",
-        "پیتزا پپرونی": "Pepperoni Pizza",
-        "پیتزا پولد بیف": "Pulled Beef Pizza",
-        "پیتزا سیر استیک": "Garlic Steak Pizza",
-        "پیتزا مارگریتا": "Margherita Pizza",
-        "نان سیر": "Garlic Bread",
-        "فاجیتا مرغ": "Chicken Fajita",
-        "استیک مرغ": "Chicken Steak",
-        "فاجیتا گوشت": "Beef Fajita",
-        "گرانوسو": "Granola Yogurt",
-        "گرانادا": "Granada",
-        "کروسان اگ": "Egg Croissant",
-        "کروسان بیکن": "Bacon Croissant",
-        "خاچاپوری": "Khachapuri",
-        "برانچ لانژ": "Lounge Brunch",
-        "ماست طعم دار شده، گرانول، انواع مغزها": "Flavoured yogurt, granola, and assorted nuts",
-        "میان وعده رژیمی": "A light, diet-friendly snack",
-        "ماستً بدون چربی، گرانول، اسلایس میوه": "Fat-free yogurt, granola, and sliced fruit",
-        "نان کروسان، نیمرو، پنیر گودا": "Croissant, fried egg, and Gouda cheese",
-        "نان کروسان، بیکن به همراه تخم مرغ هم زده": "Croissant with bacon and scrambled eggs",
-        "خمیر نان به همراه پنیر، سس گوجه و تخم مرغ": "Bread dough with cheese, tomato sauce, and egg",
-        "سوسیس، نیمرو، قارچ کره ای، سیب زمینی، سالاد": "Sausage, fried egg, buttered mushrooms, potatoes, and salad",
-        "هوکا": "Hookah",
-        "تراپیکال VIP": "Tropical VIP",
-        "كازانوا VIP": "Casanova VIP",
-        "کازانوا VIP": "Casanova VIP",
-        "ردچيل VIP": "Red Chili VIP",
-        "لاو": "Love",
-        "شب های مسکو": "Moscow Nights",
-        "آدامس دارچین": "Cinnamon Gum",
-        "دو سیب": "Double Apple",
-        "بشقاب ميوه": "Fruit Platter",
-        "بشقاب میوه": "Fruit Platter",
-        "شارژ مجدد هوكا VIP": "VIP Hookah Refill",
-        "شارژ مجدد هوکا VIP": "VIP Hookah Refill",
-        "شارژ مجدد هوكا": "Hookah Refill",
-        "شارژ مجدد هوکا": "Hookah Refill",
-        "ميوه هاي فصل": "Seasonal Fruits",
-        "میوه های فصل": "Seasonal Fruits",
-        "شارژ هوكا": "Hookah Refill",
-        "شارژ هوکا": "Hookah Refill"
-      };
-
       const transliteration = {
         "ا":"a","آ":"a","ب":"b","پ":"p","ت":"t","ث":"s","ج":"j","چ":"ch","ح":"h","خ":"kh",
         "د":"d","ذ":"z","ر":"r","ز":"z","ژ":"zh","س":"s","ش":"sh","ص":"s","ض":"z","ط":"t",
         "ظ":"z","ع":"a","غ":"gh","ف":"f","ق":"gh","ک":"k","گ":"g","ل":"l","م":"m","ن":"n",
         "و":"v","ه":"h","ی":"y","ء":"","ئ":"y","ك":"k","ي":"y","ة":"h"
       };
-
       function englishize(value) {
-        const original = (value || "").trim();
-        if (!original) return "Details unavailable";
-        if (exactEnglish[original]) return exactEnglish[original];
-        let result = original;
-        phraseEnglish.slice().sort(function(a, b) { return b[0].length - a[0].length; }).forEach(function(pair) {
+        let result = (value || "").trim();
+        phraseEnglish.forEach(function(pair) {
           result = result.split(pair[0]).join(pair[1]);
         });
-        if (/[؀-ۿ]/.test(result)) return "Menu details available on request";
+        result = result.replace(/[\u0600-\u06ff]+/g, function(word) {
+          return word.split("").map(function(letter) {
+            return transliteration[letter] || letter;
+          }).join("");
+        });
         return result || "Details unavailable";
       }
+
+      document.documentElement.lang = isEnglish ? "en" : "fa";
+      document.documentElement.dir = isEnglish ? "ltr" : "rtl";
+
+      if (faBtn) faBtn.classList.toggle("active", !isEnglish);
+      if (enBtn) enBtn.classList.toggle("active", isEnglish);
+
       document.querySelectorAll("[data-fa][data-en]").forEach(function(el) {
         let englishText = el.dataset.en;
         if (el.classList.contains("card-title")) {
