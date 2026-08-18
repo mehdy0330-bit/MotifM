@@ -38,9 +38,13 @@ var MotifPriceLoader = (function () {
     // نام ستون‌های موجود در شیت (قابل تنظیم):
     columnNames: {
       productId: 'product_id',
+      categoryId: 'category_id',
       price: 'price',
       active: 'active',
-      priceText: 'price_text'
+      priceText: 'price_text',
+      description: 'desc_fa',
+      descriptionText: 'description_text',
+      descriptionEn: 'desc_en'
     },
 
     // اگر true باشد، مقدار price_text (متن آماده) بر price عددی اولویت دارد.
@@ -159,6 +163,14 @@ var MotifPriceLoader = (function () {
     return String(value).trim();
   }
 
+  function firstValue(record, keys) {
+    for (var i = 0; i < keys.length; i++) {
+      var value = normalize(record[keys[i]]);
+      if (value !== '') return value;
+    }
+    return '';
+  }
+
   function toBoolean(value) {
     var v = normalize(value).toLowerCase();
     if (v === 'false' || v === '0' || v === 'no' || v === 'off' || v === '') {
@@ -215,6 +227,36 @@ var MotifPriceLoader = (function () {
       });
     }
 
+    // توضیحات محصول از شیت خوانده می‌شود.
+    // اولویت با description_text و سپس description است.
+    var description = firstValue(record, [
+      col.description,
+      col.descriptionText,
+      'desc_fa',
+      'description',
+      'description_text'
+    ]);
+    if (description !== '') {
+      var descriptionEn = firstValue(record, [
+        col.descriptionEn,
+        'desc_en',
+        'description_en'
+      ]);
+      var descriptionEls = item.querySelectorAll('.item-desc');
+      Array.prototype.forEach.call(descriptionEls, function (el) {
+        el.textContent = document.documentElement.lang === 'en' && descriptionEn !== ''
+          ? descriptionEn
+          : description;
+        el.setAttribute('data-fa', description);
+        el.setAttribute('data-loader-description', 'true');
+        if (descriptionEn !== '') {
+          el.setAttribute('data-en', descriptionEn);
+        } else {
+          el.setAttribute('data-en', description);
+        }
+      });
+    }
+
     // وضعیت فعال/غیرفعال
     var active = toBoolean(record[col.active]);
     if (!active) {
@@ -268,6 +310,59 @@ var MotifPriceLoader = (function () {
     });
   }
 
+  function categoryFromMenuLink(link) {
+    var onclick = link.getAttribute('onclick') || '';
+    var match = onclick.match(/goToCategory\(\s*['"]([^'"]+)['"]/);
+    return match ? normalize(match[1]) : '';
+  }
+
+  function updateCategoryVisibility(records) {
+    var col = CONFIG.columnNames;
+    var activeByCategory = {};
+
+    records.forEach(function (record) {
+      var categoryId = normalize(record[col.categoryId]);
+      if (!categoryId) return;
+      if (!Object.prototype.hasOwnProperty.call(activeByCategory, categoryId)) {
+        activeByCategory[categoryId] = false;
+      }
+      if (toBoolean(record[col.active])) {
+        activeByCategory[categoryId] = true;
+      }
+    });
+
+    var visibleCategories = [];
+    var sections = document.querySelectorAll('section.page[data-category-id]');
+    Array.prototype.forEach.call(sections, function (section) {
+      var categoryId = normalize(section.getAttribute('data-category-id'));
+      var isVisible = activeByCategory[categoryId] === true;
+      section.style.display = isVisible ? '' : 'none';
+
+      var categoryButton = document.getElementById(categoryId + 'Btn');
+      if (categoryButton) {
+        categoryButton.style.display = isVisible ? '' : 'none';
+      }
+
+      var menuLinks = document.querySelectorAll('.menu-link');
+      Array.prototype.forEach.call(menuLinks, function (link) {
+        if (categoryFromMenuLink(link) === categoryId) {
+          link.style.display = isVisible ? '' : 'none';
+        }
+      });
+
+      if (isVisible) {
+        visibleCategories.push(categoryId);
+      }
+    });
+
+    var activeSection = document.querySelector('section.page.active[data-category-id]');
+    if ((!activeSection || activeSection.style.display === 'none') && visibleCategories.length) {
+      if (typeof showPage === 'function') {
+        showPage(visibleCategories[0]);
+      }
+    }
+  }
+
   function applyToDom(records) {
     var col = CONFIG.columnNames;
     var index = {};
@@ -287,7 +382,9 @@ var MotifPriceLoader = (function () {
     });
 
     hideEmptySections();
-    log('تعداد محصولات به‌روزرسانی‌شده:', applied, 'از', items.length);
+    updateCategoryVisibility(records);
+    var descriptionsApplied = document.querySelectorAll('.item-desc[data-loader-description="true"]').length;
+    log('تعداد محصولات به‌روزرسانی‌شده:', applied, 'از', items.length, '— توضیحات:', descriptionsApplied);
     return applied;
   }
 
@@ -350,7 +447,9 @@ var MotifPriceLoader = (function () {
       return Promise.resolve(applyToDom(cacheStore));
     }
 
-    return fetchCsv(cfg.csvUrl)
+    var requestUrl = cfg.csvUrl + (cfg.csvUrl.indexOf('?') >= 0 ? '&' : '?') + '_motif_ts=' + Date.now();
+
+    return fetchCsv(requestUrl)
       .then(function (text) {
         var records = csvToObjects(text);
         if (!records.length) {
