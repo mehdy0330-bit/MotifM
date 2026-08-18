@@ -1397,6 +1397,8 @@
         let englishText = el.dataset.en;
         if (el.classList.contains("card-title")) {
           englishText = categoryEnglish[el.dataset.fa.trim()] || englishText;
+        } else if (el.classList.contains("item-desc") && el.dataset.loaderDescription === "true" && el.dataset.en) {
+          englishText = el.dataset.en;
         } else if (el.classList.contains("item-name") || el.classList.contains("item-desc")) {
           englishText = englishize(el.dataset.fa);
         }
